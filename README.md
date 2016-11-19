@@ -1,7 +1,7 @@
 # hex_to_binary
 Make a binary file from hex string file.
 
-# How to use it
+# Usage
 
 ```
 $ echo "00 01 02 03" >> sample.txt
@@ -10,4 +10,7 @@ output file : sample.bin
 binary size : 4 bytes
 $ ls
 README.md        hex_to_binary.rb sample.bin       sample.txt
+$ hexdump sample.bin
+0000000 00 01 02 03                                    
+0000004
 ```
