@@ -1,18 +1,19 @@
+require "pathname"
 
-
-if ARGV.size == 0
-  puts("argument size is 0")
+if ARGV.empty?
+  puts "argument size is 0"
   exit
 end
 
-binary_txt = File.open(ARGV[0], "r").read
+src_path = Pathname(ARGV[0])
 
-hex_dat	= binary_txt.split(" ").join
-binary	= [hex_dat].pack("H*")
+binary_txt = src_path.read
 
-filename = File.basename(ARGV[0],".*")
-outputfileName = filename + ".bin"
+hex_dat = binary_txt.split(" ").join
+binary  = [hex_dat].pack("H*")
 
-open(outputfileName, "wb") {|f| f.write binary}
-puts("output file : " + outputfileName)
-puts("binary size : " + File.size(outputfileName).to_s + " bytes")
+dest_path = src_path.sub_ext(".bin")
+
+dest_path.binwrite(binary)
+puts "output file: #{dest_path}"
+puts "binary size: #{binary.size} bytes"
